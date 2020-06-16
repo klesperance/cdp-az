@@ -22,6 +22,11 @@ resource "azurerm_subnet" "cdp" {
 
 }
 
+resource "azurerm_subnet_network_security_group_association" "cdp" {
+  subnet_id                 = azurerm_subnet.cdp.id
+  network_security_group_id = azurerm_network_security_group.cdp.id
+}
+
 resource "azurerm_virtual_network" "cdp" {
   name                = "vnet-${var.prefix}"
   location            = azurerm_resource_group.cdp.location
